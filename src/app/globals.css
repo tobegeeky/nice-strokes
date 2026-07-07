@@ -29,7 +29,7 @@
   padding: 1rem;
 }
 
-.navbar-item a /selects the anchor tag or tags in navbar-item className/
+.navbar-item a /*selects the anchor tag or tags in navbar-item className*/
 { 
   text-decoration: none;
   color: var(--fg);

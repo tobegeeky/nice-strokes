@@ -1,0 +1,6 @@
+"use client";
+import { TransitionRouter } from "next-transition-router";
+
+export default function TransitionProvider({children}) {
+    return <TransitionRouter auto>{children}</TransitionRouter>;
+}

@@ -5,6 +5,7 @@ import { Barlow_Condensed, DM_Sans } from "next/font/google";
                                                               
 
 import NavBar from "@/components/NavBar/NavBar";
+import TransitionProvider from "../providers/TransitionProvider";
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default function RootLayout({children}) {
     >
       <body>
         <NavBar/>
-        {children}
+        <TransitionProvider>{children}</TransitionProvider>
       </body>
     </html>
   );
