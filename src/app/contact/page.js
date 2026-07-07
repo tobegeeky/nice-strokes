@@ -1,9 +1,9 @@
-const Home = () => {
+const Contact = () => {
     return (
         <section className="hero">
-            <h1>Home</h1>
+            <h1>Contact</h1>
         </section>
     )
 };
 
-export default Home; 
+export default Contact; 
