@@ -1,12 +1,28 @@
 "use client";
+import { useRef, useEffect } from "react";
 import { TransitionRouter } from "next-transition-router";
 
 export default function TransitionProvider({children}) {
+    const svgRef = useRef(null);
+    const pathsRef = useRef([]);
+
+    useEffect(() => {
+        if (!svgRef.current) return;
+        pathsRef.current = Array.from(svgRef.current.querySelectorAll("path"));
+
+        pathsRef.current.forEach((path) => {
+            const length = path.getTotalLength();
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+
+        });
+    }, []);
+
     return (
         <TransitionRouter auto>
             <div className="transition-svg">
                 <svg 
-                
+                    ref={svgRef}
                     viewBox="0 0 685 770" 
                     fill="none" 
                     xmlns="http://www.w3.org/2000/svg"
