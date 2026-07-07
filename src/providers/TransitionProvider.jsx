@@ -1,6 +1,8 @@
 "use client";
 import { useRef, useEffect } from "react";
 import { TransitionRouter } from "next-transition-router";
+import gsap from "gsap";
+import next from "next";
 
 export default function TransitionProvider({children}) {
     const svgRef = useRef(null);
@@ -19,7 +21,53 @@ export default function TransitionProvider({children}) {
     }, []);
 
     return (
-        <TransitionRouter auto>
+        <TransitionRouter auto 
+            leave={( next ) => { //gsap 1st fn, triggers first on route change
+                const t1 = gsap.timeline({ onComplete: next });
+
+                pathsRef.current.forEach((path) => {
+                    t1.to(
+                        path,
+                        {
+                            strokeDashoffset: 0,
+                            attr: { "stroke-width": 100 },
+                            duration: 1,
+                            ease: "power1.inOut",
+                        },
+                        0,
+                    );
+                });
+
+                return () => t1.kill();
+
+            }}
+
+            enter={( next ) => { //gsap 2nd fn, triggers after on leave
+                const t1 = gsap.timeline({ onComplete: next });
+
+                pathsRef.current.forEach((path) => {
+                    const length = path.getTotalLength();
+
+                    t1.to(
+                        path,
+                        {
+                            strokeDashoffset: -length,
+                            attr: { "stroke-width": 50 },
+                            duration: 1,
+                            ease: "power1.inOut",
+                            onComplete: () => {
+                                gsap.set(path, { strokeDashoffset: length });
+                            },
+                        },
+                        0,
+                    );
+                });
+
+                return () => t1.kill();
+            }}
+            
+
+        >
             <div className="transition-svg">
                 <svg 
                     ref={svgRef}
