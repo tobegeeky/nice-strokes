@@ -4,7 +4,7 @@ import { Barlow_Condensed, DM_Sans } from "next/font/google";
 //so that there are no external requests to google fonts at runtime!
                                                               
 
-import NavBar from "@/components/NavBar/NavBar";
+import NavBar from "@/components/NavBar";
 import TransitionProvider from "../providers/TransitionProvider";
 
 const barlowCondensed = Barlow_Condensed({
