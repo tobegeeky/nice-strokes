@@ -1,9 +1,9 @@
-const Contact = () => {
+const GItHub = () => {
     return (
         <section className="hero">
-            <h1>Contact</h1>
+            <h1>GItHub</h1>
         </section>
     )
 };
 
-export default Contact; 
+export default GItHub; 
